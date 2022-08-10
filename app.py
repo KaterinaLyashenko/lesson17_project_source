@@ -59,7 +59,7 @@ class MovieView(Resource):
         return movies_schema.dump(all_movies), 200
 
     def post(self):
-        req_json = request.json()
+        req_json = request.json
         new_movie = Movie(**req_json)
         with db.session.begin():
             db.session.add(new_movie)
@@ -80,7 +80,7 @@ class MovieView(Resource):
 
     def patch(self, mid: int):
         movie = db.session.query(Movie).get(mid)
-        if  not movie:
+        if not movie:
             return "Нет такого фильма", 404
 
         req_json = request.json
@@ -106,7 +106,7 @@ class MovieView(Resource):
         movie = db.session.query(Movie).get(mid)
         if movie:
             return "Нет такого фильма", 404
-        req_json = request.json()
+        req_json = request.json
 
         movie.title = req_json['title']
         movie.description = req_json['description']
