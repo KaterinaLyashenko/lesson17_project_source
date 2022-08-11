@@ -104,7 +104,7 @@ class MovieView(Resource):
 
     def put(self, mid):
         movie = db.session.query(Movie).get(mid)
-        if movie:
+        if movie is None:
             return "Нет такого фильма", 404
         req_json = request.json
 
@@ -121,7 +121,7 @@ class MovieView(Resource):
 
     def delete(self, mid):
         movie = db.session.query(Movie).get(mid)
-        if movie:
+        if movie is None:
             return "Нет такого фильма", 404
         db.session.delete(movie)
         db.session.commit()
